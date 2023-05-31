@@ -10,7 +10,10 @@ def run_urls(urls):
         if not url.startswith(('https://', 'http://')):
             url = 'https://' + url
 
-        requests.get(url, timeout=3, verify=False)
+        try:
+            requests.get(url, timeout=3, verify=False)
+        except Exception as e:
+            logging.error(e)
 
 
 def read_urls(filename):
