@@ -2,6 +2,9 @@ import logging
 import signal
 import sys
 import requests
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def run_urls(urls):
@@ -11,7 +14,7 @@ def run_urls(urls):
             url = 'https://' + url
 
         try:
-            requests.get(url, timeout=3, verify=False)
+            requests.get(url, timeout=3, verify=False, allow_redirects=False)
         except Exception as e:
             logging.error(e)
 
