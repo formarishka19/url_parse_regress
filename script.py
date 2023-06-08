@@ -1,3 +1,4 @@
+from distutils.util import strtobool
 import logging
 import os
 import signal
@@ -10,6 +11,7 @@ load_dotenv()
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+ALLOW_REDIRECTS = strtobool(os.getenv('ALLOW_REDIRECTS', default='False'))
 USER_AGENT = os.getenv(
     'USER_AGENT',
     default=(
@@ -31,7 +33,7 @@ def run_urls(urls):
                 headers={'User-Agent': USER_AGENT},
                 timeout=3,
                 verify=False,
-                allow_redirects=False
+                allow_redirects=ALLOW_REDIRECTS
             )
         except Exception as e:
             logging.error(e)
