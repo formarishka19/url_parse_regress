@@ -41,11 +41,11 @@ def run_urls(urls):
 
 def read_urls(filename):
     """Читаем урлы из файла."""
-    urls = set()
+    urls = []
 
     with open(filename, 'r', encoding='UTF-8') as file:
         for line in file:
-            urls.add(line.strip())
+            urls.append(line.strip())
 
     return urls
 
